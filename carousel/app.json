@@ -1,0 +1,12 @@
+{
+  "name": "carousel",
+  "displayName": "carousel",
+  "expo": {
+    "name": "carousel",
+    "slug": "carousel",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
