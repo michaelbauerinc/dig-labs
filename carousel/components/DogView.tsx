@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     textAlign: "center",
-    fontFamily: "",
     fontWeight: "900",
   },
   body: {
     fontSize: 20,
     paddingTop: "5%",
     textAlign: "center",
+    fontWeight: "900",
   },
 });
 const bodyText = "Adopt him and take him home today!";

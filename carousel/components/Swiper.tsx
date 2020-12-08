@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated, {
@@ -17,7 +17,7 @@ import { snapPoint, timing, useClock, usePanGestureHandler, useValue } from "rea
 import { Link } from "react-router-dom";
 let { width, height } = Dimensions.get("window");
 
-export const assets = [
+export let assets = [
   require("./assets/3.jpg"),
   require("./assets/2.jpg"),
   require("./assets/4.jpg"),
@@ -50,12 +50,29 @@ const styles = StyleSheet.create({
 });
 
 const Swiper = () => {
+  const [loading, setLoading] = useState(true);
   const clock = useClock();
   const index = useValue(0);
   const offsetX = useValue(0);
   const translateX = useValue(0);
   const { gestureHandler, state, velocity, translation } = usePanGestureHandler();
   const to = snapPoint(translateX, velocity.x, snapPoints);
+  let test;
+  // let test = await fetch("https://dog.ceo/api/breeds/image/random");
+  // console.log(test.body);
+  useEffect(() => {
+    async function getAssets() {
+      for (let i of [0, 1, 2, 3, 4]) {
+        test = await fetch("https://dog.ceo/api/breeds/image/random")
+          .then((response) => response.json())
+          .then((data) => assets.splice(i, i, data.message));
+      }
+      setLoading(false);
+      return assets;
+    }
+    getAssets();
+  }, []);
+  console.log(test);
   useCode(
     () => [
       cond(eq(state, State.ACTIVE), [set(translateX, add(offsetX, translation.x))]),
@@ -67,16 +84,21 @@ const Swiper = () => {
     ],
     []
   );
+
+  if (loading) {
+    return "loading";
+  }
+  console.log(assets);
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>
         <Animated.View style={StyleSheet.absoluteFill}>
           <Animated.View style={[styles.pictures, { transform: [{ translateX }] }]}>
             {assets.map((source, i) => (
-              <TouchableWithoutFeedback key={source} onPress={() => console.log(i)}>
+              <TouchableWithoutFeedback key={source}>
                 <View key={source} style={styles.picture}>
                   <Link to={`/dogs/${i + 1}`}>
-                    <Image style={styles.image} {...{ source }} />
+                    <Image style={styles.image} source={{ uri: source }} />
                   </Link>
                 </View>
               </TouchableWithoutFeedback>
