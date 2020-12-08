@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     textAlign: "center",
-    fontWeight: "900",
-    width: "80%",
     alignSelf: "center",
+    width: "80%",
+    fontWeight: "900",
   },
   body: {
     fontSize: 20,
@@ -39,11 +39,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-const DogView = (props) => {
-  let { id } = useParams();
-  let titleText = `Good eye! This doggo's name is ${allDogNames[id - 1]}!`;
-  const bodyText = "Adopt this good boy/girl and take them home today!";
-  let url = props.location.state.url;
+const Home = (props) => {
+  let titleText =
+    "Welcome to DoggoFinder!\n\n\n Swipe left and right to browse doggos. When you find one that you love, tap to go to their own personal page!";
   return (
     <View>
       <Text style={styles.title}>
@@ -51,15 +49,13 @@ const DogView = (props) => {
         {"\n"}
         {"\n"}
       </Text>
-      <Image style={styles.image} source={{ uri: url }} />
-      <Text style={styles.body}>{bodyText}</Text>
       <View style={styles.button}>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <Button title="Back" color="#FFA500" />
+        <Link to="/browse" style={{ textDecoration: "none" }}>
+          <Button title="Begin" color="#FFA500" />
         </Link>
       </View>
     </View>
   );
 };
 
-export default DogView;
+export default Home;

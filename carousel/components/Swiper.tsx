@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View, ActivityIndicator } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated, {
   add,
@@ -30,7 +30,7 @@ const snapPoints = assets.map((_, i) => i * -width);
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "black",
+    backgroundColor: "#1E90FF",
   },
   pictures: {
     width: width * assets.length,
@@ -72,23 +72,21 @@ const Swiper = () => {
     }
     getAssets();
   }, []);
-  console.log(test);
   useCode(
     () => [
       cond(eq(state, State.ACTIVE), [set(translateX, add(offsetX, translation.x))]),
       cond(eq(state, State.END), [
         set(translateX, timing({ clock, from: translateX, to })),
         set(offsetX, translateX),
-        cond(not(clockRunning(clock)), [set(index, floor(divide(translateX, -width))), debug("index", index)]),
+        cond(not(clockRunning(clock)), [set(index, floor(divide(translateX, -width)))]),
       ]),
     ],
     []
   );
 
   if (loading) {
-    return "loading";
+    return <ActivityIndicator size="large" color="white" />;
   }
-  console.log(assets);
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>
@@ -97,7 +95,14 @@ const Swiper = () => {
             {assets.map((source, i) => (
               <TouchableWithoutFeedback key={source}>
                 <View key={source} style={styles.picture}>
-                  <Link to={`/dogs/${i + 1}`}>
+                  <Link
+                    to={{
+                      pathname: `/dogs/${i + 1}`,
+                      state: {
+                        url: source,
+                      },
+                    }}
+                  >
                     <Image style={styles.image} source={{ uri: source }} />
                   </Link>
                 </View>
