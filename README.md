@@ -6,7 +6,7 @@ This is a demo project for DigLabs using React Native. The project will open to 
 "Welcome to DoggoFinder! Swipe left and right to browse doggos. When you find one that you love, tap to go to their own personal page!"
 ```
 
-The app makes a request to Dog Api (https://dog.ceo/dog-api/), populates a swipable image carousel, and allows the user to navigate to a route that is representative of the particular dog on tap.
+The app makes a request to Dog Api (https://dog.ceo/dog-api/), populating a swipable image carousel with five random dog pictures. From there, a user may navigate to a route that is representative of the particular dog on a tap input.
 
 ## Running the app locally
 
