@@ -14,7 +14,7 @@ import Animated, {
   useCode,
 } from "react-native-reanimated";
 import { snapPoint, timing, useClock, usePanGestureHandler, useValue } from "react-native-redash/lib/module/v1";
-
+import { Link } from "react-router-dom";
 let { width, height } = Dimensions.get("window");
 
 export const assets = [
@@ -72,10 +72,12 @@ const Swiper = () => {
       <PanGestureHandler {...gestureHandler}>
         <Animated.View style={StyleSheet.absoluteFill}>
           <Animated.View style={[styles.pictures, { transform: [{ translateX }] }]}>
-            {assets.map((source) => (
-              <TouchableWithoutFeedback key={source} onPress={() => alert("working")}>
+            {assets.map((source, i) => (
+              <TouchableWithoutFeedback key={source} onPress={() => console.log(i)}>
                 <View key={source} style={styles.picture}>
-                  <Image style={styles.image} {...{ source }} />
+                  <Link to={`/dogs/${i + 1}`}>
+                    <Image style={styles.image} {...{ source }} />
+                  </Link>
                 </View>
               </TouchableWithoutFeedback>
             ))}
