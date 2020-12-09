@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View, Text, Button } from "react-native";
+import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View, Text, Button, ScrollView } from "react-native";
 import { Link, useParams } from "react-router-dom";
 let { width, height } = Dimensions.get("window");
 
@@ -37,13 +37,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: "100px",
     alignSelf: "center",
+    paddingBottom: "20px",
   },
 });
 const Home = (props) => {
   let titleText =
     "Welcome to DoggoFinder!\n\n\n Swipe left and right to browse doggos. When you find one that you love, tap to go to their own personal page!";
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.title}>
         {titleText}
         {"\n"}
@@ -54,7 +55,7 @@ const Home = (props) => {
           <Button title="Begin" color="#FFA500" />
         </Link>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View, Text, Button } from "react-native";
+import { Dimensions, Image, StyleSheet, TouchableWithoutFeedback, View, Text, Button, ScrollView } from "react-native";
 import { Link, useParams } from "react-router-dom";
 let { width, height } = Dimensions.get("window");
 
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   image: {
-    width: 600,
+    width: "80%",
     height: 400,
     alignSelf: "center",
   },
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
+    paddingBottom: "20px",
     width: "100px",
     alignSelf: "center",
   },
@@ -45,7 +46,7 @@ const DogView = (props) => {
   const bodyText = "Adopt this good boy/girl and take them home today!";
   let url = props.location.state.url;
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.title}>
         {titleText}
         {"\n"}
@@ -58,7 +59,7 @@ const DogView = (props) => {
           <Button title="Back" color="#FFA500" />
         </Link>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
