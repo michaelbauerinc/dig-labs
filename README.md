@@ -10,6 +10,12 @@ The app makes a request to Dog Api (https://dog.ceo/dog-api/), populating a swip
 
 ## Running the app locally
 
+### Clone the repo
+
+```bash
+git clone https://github.com/michaelbauerinc/dig-labs.git
+```
+
 ### Install dependencies
 
 Install expo:
