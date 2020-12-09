@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
     paddingTop: "5%",
     textAlign: "center",
     fontWeight: "900",
+    width: "80%",
+    alignSelf: "center",
   },
   button: {
     marginTop: 20,
